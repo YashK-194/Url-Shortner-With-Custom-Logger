@@ -3,10 +3,11 @@
  * A reusable logging module for web applications
  */
 
-const axios = require("axios");
+import axios from "axios";
 
 // Configuration
 const LOG_API_URL = "http://20.244.56.144/evaluation-service/logs";
+const API_KEY = process.env.LOGGING_API_KEY || process.env.API_KEY;
 
 // Allowed values for validation
 const ALLOWED_VALUES = {
@@ -104,11 +105,29 @@ async function Log(stack, level, pkg, message) {
   };
 
   try {
+    // Prepare headers
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    // Add authorization header if API key is available
+    if (API_KEY) {
+      headers["Authorization"] = `Bearer ${API_KEY}`;
+    }
+
     // Send log to the API
-    const response = await axios.post(LOG_API_URL, logData);
+    const response = await axios.post(LOG_API_URL, logData, { headers });
     return response.data;
   } catch (error) {
     // Handle API errors but don't throw (to avoid crashing the app)
+    if (error.response && error.response.status === 401) {
+      console.warn(
+        "Logging API authentication failed. Please set LOGGING_API_KEY environment variable."
+      );
+      console.warn("Log data:", JSON.stringify(logData, null, 2));
+      return null;
+    }
+
     console.error("Failed to send log:", error.message);
     if (error.response) {
       console.error("Response status:", error.response.status);
@@ -118,4 +137,4 @@ async function Log(stack, level, pkg, message) {
   }
 }
 
-module.exports = { Log };
+export { Log };

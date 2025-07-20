@@ -2,6 +2,14 @@
 
 A reusable logging middleware package for web applications to send logs to a centralized logging server.
 
+## Demo
+
+Here's an example of the URL Shortener application using this logging middleware:
+
+![URL Shortener Demo](../url-shortner/demo-screenshot.png)
+
+_The logging middleware captures all user interactions, form submissions, and navigation events in this URL shortener application._
+
 ## Installation
 
 ```bash
@@ -76,3 +84,23 @@ Sends a log entry to the logging server.
 - "config"
 - "middleware"
 - "utils"
+
+## Configuration
+
+### Environment Variables
+
+The logging middleware requires an API key to authenticate with the logging server. Set one of the following environment variables:
+
+- `LOGGING_API_KEY` - The preferred environment variable name
+- `API_KEY` - Alternative environment variable name
+
+```bash
+# In your .env.local file
+LOGGING_API_KEY=your-actual-api-key-here
+```
+
+If no API key is provided, the middleware will:
+
+- Still attempt to send logs (for backward compatibility)
+- Show a warning message for 401 authentication errors
+- Continue functioning without crashing your application

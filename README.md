@@ -8,6 +8,10 @@ Apparently, **Affordmed** (the company that can't "afford" to pay their interns)
 
 ## Features
 
+![URL Shortener Application](url-shortner/demo-screenshot.png)
+
+_The URL Shortener application in action - showing the bulk URL creation form with validation and success feedback._
+
 ### 🚀 Core Functionality
 
 - **Bulk URL Shortening**: Create up to 5 shortened URLs at once

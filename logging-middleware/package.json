@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A reusable logging middleware for web applications",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "keywords": [
     "logging",
     "middleware",

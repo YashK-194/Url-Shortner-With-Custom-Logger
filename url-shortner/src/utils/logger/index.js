@@ -2,15 +2,15 @@
  * Logger utility that integrates with the logging-middleware
  */
 
-import { Log } from '../../../logging-middleware';
+import { Log } from "logging-middleware";
 
 // Define categories of logs for better organization
 const LOG_CATEGORIES = {
-  URL_MANAGEMENT: 'url management',
-  FORM_HANDLING: 'form handling',
-  NAVIGATION: 'navigation',
-  ERROR_HANDLING: 'error handling',
-  STATE_MANAGEMENT: 'state management',
+  URL_MANAGEMENT: "url management",
+  FORM_HANDLING: "form handling",
+  NAVIGATION: "navigation",
+  ERROR_HANDLING: "error handling",
+  STATE_MANAGEMENT: "state management",
 };
 
 /**
@@ -24,8 +24,10 @@ const logger = {
    * @param {Object} details - Additional details to include in the log
    */
   debug: (pkg, message, details = {}) => {
-    const enhancedMessage = details ? `${message} - ${JSON.stringify(details)}` : message;
-    Log('frontend', 'debug', pkg, enhancedMessage);
+    const enhancedMessage = details
+      ? `${message} - ${JSON.stringify(details)}`
+      : message;
+    Log("frontend", "debug", pkg, enhancedMessage);
   },
 
   /**
@@ -35,8 +37,10 @@ const logger = {
    * @param {Object} details - Additional details to include in the log
    */
   info: (pkg, message, details = {}) => {
-    const enhancedMessage = details ? `${message} - ${JSON.stringify(details)}` : message;
-    Log('frontend', 'info', pkg, enhancedMessage);
+    const enhancedMessage = details
+      ? `${message} - ${JSON.stringify(details)}`
+      : message;
+    Log("frontend", "info", pkg, enhancedMessage);
   },
 
   /**
@@ -46,8 +50,10 @@ const logger = {
    * @param {Object} details - Additional details to include in the log
    */
   warn: (pkg, message, details = {}) => {
-    const enhancedMessage = details ? `${message} - ${JSON.stringify(details)}` : message;
-    Log('frontend', 'warn', pkg, enhancedMessage);
+    const enhancedMessage = details
+      ? `${message} - ${JSON.stringify(details)}`
+      : message;
+    Log("frontend", "warn", pkg, enhancedMessage);
   },
 
   /**
@@ -58,15 +64,17 @@ const logger = {
    */
   error: (pkg, message, error = {}) => {
     let enhancedMessage = message;
-    
+
     // If error is an Error object, extract useful information
     if (error instanceof Error) {
-      enhancedMessage = `${message} - ${error.message}${error.stack ? ` | Stack: ${error.stack}` : ''}`;
-    } else if (typeof error === 'object' && error !== null) {
+      enhancedMessage = `${message} - ${error.message}${
+        error.stack ? ` | Stack: ${error.stack}` : ""
+      }`;
+    } else if (typeof error === "object" && error !== null) {
       enhancedMessage = `${message} - ${JSON.stringify(error)}`;
     }
-    
-    Log('frontend', 'error', pkg, enhancedMessage);
+
+    Log("frontend", "error", pkg, enhancedMessage);
   },
 
   /**
@@ -77,16 +85,18 @@ const logger = {
    */
   fatal: (pkg, message, error = {}) => {
     let enhancedMessage = message;
-    
+
     // If error is an Error object, extract useful information
     if (error instanceof Error) {
-      enhancedMessage = `${message} - ${error.message}${error.stack ? ` | Stack: ${error.stack}` : ''}`;
-    } else if (typeof error === 'object' && error !== null) {
+      enhancedMessage = `${message} - ${error.message}${
+        error.stack ? ` | Stack: ${error.stack}` : ""
+      }`;
+    } else if (typeof error === "object" && error !== null) {
       enhancedMessage = `${message} - ${JSON.stringify(error)}`;
     }
-    
-    Log('frontend', 'fatal', pkg, enhancedMessage);
-  }
+
+    Log("frontend", "fatal", pkg, enhancedMessage);
+  },
 };
 
 export { logger, LOG_CATEGORIES };
